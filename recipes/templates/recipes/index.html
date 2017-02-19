@@ -1,0 +1,26 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Recipes</h1>
+    <h2><em>Top rated recipes.</em></h2>
+</div>
+{% if recipes %}
+<ul class="recipe-list">
+{% for recipe in recipes %}
+    <div class="recipe-list-item row">
+        <div class="col-sm-2">
+            <img class="img-thumbnail img-responsive" src="{{ recipe.main_image.url }}" alt="Instruction visual">
+        </div>
+        <div class="col-sm-8">
+            <li>
+                <h2><a href="{% url 'detail' recipe_id=recipe.id %}">{{ recipe.title }}</a></h2><em>{{ recipe.summary }}</em>
+            </li>
+        </div>
+    </div>
+{% endfor %}
+</ul>
+{% else %}
+    <p>No Recipes are available.</p>
+{% endif %}
+{% endblock %}

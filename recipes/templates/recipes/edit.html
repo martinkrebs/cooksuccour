@@ -1,0 +1,11 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+    <h1>Edit Recipe</h1>
+    <form method="post" class="recipe-form" enctype='multipart/form-data'>{% csrf_token %}
+        <em>For Ingredients and Instructions entry, just start each Ingredient or  Instruction with a # character.</em>
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+

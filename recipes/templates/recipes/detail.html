@@ -1,0 +1,111 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="page-header">
+    <a  style="float: right;" class="btn btn-default" href="{% url 'edit' recipe_id=recipe.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <h1>{{ recipe.title|title }}</h1>
+    <h2><em>{{ recipe.summary }}</em></h2>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+
+        <section class="information">
+            <h5>INFORMATION</h5>
+            <div class="row center-block">
+                <div class="col-xs-4">
+                    <img src="{% static "recipes/preparation-48.png"  %}"><span>{{ recipe.preparation_time }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <img src="{% static "recipes/timer-48.png" %}"><span>{{ recipe.cooking_time }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <img src="{% static "recipes/serves-48.png" %}"><span>{{ recipe.serves }}</span>
+                </div>
+            </div>
+            <div class="row center-block">
+                <div class="col-xs-4">
+                    <img src="{% static "recipes/freeze.jpg" %}"><span>{{ recipe.freezable }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <img src="{% static "recipes/difficulty-easy.png" %}"><span>Easy</span>
+                </div>
+            </div>
+            <div class="rating row center-block">
+                <img src="{% static "recipes/stars5.png" %}">
+            </div>
+        </section>
+
+        <section class="ingredients">
+            <h5>INGREDIENTS</h5>
+            <ul>
+            {% for ingredient in ingredients %}
+                <li>{{ ingredient }}</li>
+            {% endfor %}
+            </ul>
+        </section>
+
+         <section class='instructions'>
+            <h5>INSTRUCTIONS</h5>
+            <ol>
+            {% for instruction in instructions %}
+                <li>{{ instruction }}</li>
+            {% endfor %}
+            </ol>
+        </section>
+
+    </div>
+    <div class="col-sm-8">
+        <img class="img-rounded img-responsive" src="{{ recipe.main_image.url }}" alt="Finished Dish" />
+        <hr>
+
+        <!--
+        <div class="row">
+        {% for instruction in instructions %}
+            {% if instruction.image %}
+            <div class="col-xs-4 instruction-image">
+                <img class="img-thumbnail" src="{{ instruction.image.url }}" alt="Instruction visual" />
+                <div class="image-caption">{{ instruction.step }}</div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        -->
+        <div class="row">
+            {% if recipe.image_a %}
+            <div class="col-xs-4 instruction-image">
+                <img class="img-thumbnail" src="{{ recipe.image_a.url }}" alt="Instruction visual" />
+                <div class="image-caption">A</div>
+            </div>
+            {% endif %}
+            {% if recipe.image_b %}
+            <div class="col-xs-4 instruction-image">
+                <img class="img-thumbnail" src="{{ recipe.image_b.url }}" alt="Instruction visual" />
+                <div class="image-caption">B</div>
+            </div>
+            {% endif %}
+            {% if recipe.image_c %}
+            <div class="col-xs-4 instruction-image">
+                <img class="img-thumbnail" src="{{ recipe.image_c.url }}" alt="Instruction visual" />
+                <div class="image-caption">C</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <hr>
+        <section class="dummy-adverts">
+            <div class="row">
+                <img src="{% static "recipes/addsense3.png" %}">
+                <img src="{% static "recipes/addsense3.png" %}">
+                <img src="{% static "recipes/addsense3.png" %}">
+                <img class="img-responsive" src="{% static "recipes/addsense1.png" %}">
+                <img class="img-responsive" src="{% static  "recipes/addsense2.png" %}">
+                <img class="img-responsive" src="{% static "recipes/addsense4.png" %}">
+            </div>
+        </section>
+
+    </div>
+
+</div>
+{% endblock %}
